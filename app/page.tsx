@@ -1,7 +1,6 @@
-import { fetchCars } from "@utils";
 import { HomeProps } from "@types";
-import { fuels, yearsOfProduction, allCars } from "@constants";
-import { CarCard, ShowMore, SearchBar, CustomFilter, Hero } from "@components";
+import { allCars } from "@constants";
+import { CarCard, Hero } from "@components";
 
 export default async function Home({ searchParams }: HomeProps) {
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
@@ -32,11 +31,6 @@ export default async function Home({ searchParams }: HomeProps) {
                 <CarCard car={car} />
               ))}
             </div>
-
-            <ShowMore
-              pageNumber={(searchParams.limit || 10) / 10}
-              isNext={(searchParams.limit || 10) > allCars.length}
-            />
           </section>
         ) : (
           <div className='home__error-container'>
