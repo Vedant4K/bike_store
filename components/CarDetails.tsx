@@ -9,6 +9,9 @@ import { CarProps } from "@types";
 import { generateCarImageUrl } from "@utils";
 import { CustomButton } from "@components";
 import BookTestDrive from "./BookTestDrive";
+import { useAuth } from "@clerk/nextjs";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface CarDetailsProps {
   isOpen: boolean;
@@ -19,6 +22,20 @@ interface CarDetailsProps {
 const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
 
   const [isBooking, setIsBooking] = useState(false)
+  const { isSignedIn } = useAuth();
+
+  const handleBooking = () => {
+    if(!isSignedIn){
+      toast.info("Please sign in to book a test ride", {
+        theme: "colored",
+      });
+      return;
+    }
+    else {
+      setIsBooking(true)
+    }
+  }
+  
 
   return( 
   <>
@@ -83,7 +100,7 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
                       title="Book a test ride"
                       btnType="button"
                       containerStyles="text-white rounded-full bg-primary-blue min-w-[130px]"
-                      handleClick={() => setIsBooking(true)}
+                      handleClick={handleBooking}
                     />
                   </div>
 
@@ -113,6 +130,8 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
         </div>
       </Dialog>
     </Transition>
+    <BookTestDrive isBooking={isBooking} closeModal={() => setIsBooking(false)} car={car} />
+    <ToastContainer />
   </>
 )};
 
