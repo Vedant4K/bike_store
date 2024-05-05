@@ -15,25 +15,25 @@ const Hero = () => {
 
   return (
     <div className="hero">
-      <div className="flex-1 pt-36 padding-x">
+      <div className="flex-1 pt-24 padding-x">
         <h1 className="hero__title">
-          Find, book, rent a car—quick and super easy!
+          Find, and test ride a bike-quick and super easy!
         </h1>
 
         <p className="hero__subtitle">
-          Streamline your car rental experience with our effortless booking
+          Streamline your bike search experience with our effortless booking
           process.
         </p>
 
         <CustomButton
-          title="Explore Cars"
+          title="Explore Bikes"
           containerStyles="bg-primary-blue text-white rounded-full mt-10"
           handleClick={handleScroll}
         />
       </div>
       <div className="hero__image-container">
         <div className="hero__image">
-          <Image src="/hero.png" alt="hero" fill className="object-contain" />
+          <Image src="/hero-bike-s1000rr.png" alt="hero" fill className="object-contain scale-125" />
         </div>
 
         <div className="hero__image-overlay" />

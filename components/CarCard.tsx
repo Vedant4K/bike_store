@@ -13,24 +13,24 @@ interface CarCardProps {
 }
 
 const CarCard = ({ car }: CarCardProps) => {
-  const { city_mpg, year, make, model, transmission, drive } = car;
+  const { name, year, model } = car;
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const carRent = calculateCarRent(city_mpg, year);
+  // const carRent = calculateCarRent(city_mpg, year);
 
   return (
     <div className="car-card group">
       <div className="car-card__content">
         <h2 className="car-card__content-title">
-          {make} {model}
+          {name}
         </h2>
       </div>
 
-      <p className='flex mt-6 text-[32px] leading-[38px] font-extrabold'>
-        <span className='self-start text-[14px] leading-[17px] font-semibold'>$</span>
-        {carRent}
-        <span className='self-end text-[14px] leading-[17px] font-medium'>/day</span>
+      <p className='flex mt-2 text-lg leading-[38px] font-bold text-gray-800'>
+        {/* <span className='self-start text-[14px] leading-[17px] font-semibold'>$</span> */}
+        {car.price} onwards
+        {/* <span className='self-end text-[14px] leading-[17px] font-medium'>/day</span> */}
       </p>
 
       <div className='relative w-full h-40 my-3 object-contain'>
@@ -38,20 +38,20 @@ const CarCard = ({ car }: CarCardProps) => {
       </div>
 
       <div className='relative flex w-full mt-2'>
-        <div className='flex group-hover:invisible w-full justify-between text-grey'>
+        <div className='flex group-hover:invisible w-full justify-between text-grey font-semibold'>
           <div className='flex flex-col justify-center items-center gap-2'>
-            <Image src='/steering-wheel.svg' width={20} height={20} alt='steering wheel' />
+            <Image src='/piston.svg' width={25} height={25} alt='steering wheel' />
             <p className='text-[14px] leading-[17px]'>
-              {transmission === "a" ? "Automatic" : "Manual"}
+              {car.power}
             </p>
           </div>
           <div className="car-card__icon">
-            <Image src="/tire.svg" width={20} height={20} alt="seat" />
-            <p className="car-card__icon-text">{drive.toUpperCase()}</p>
+            <Image src="/power.svg" width={25} height={25} alt="seat" />
+            <p className="car-card__icon-text">{car.torque}</p>
           </div>
           <div className="car-card__icon">
-            <Image src="/gas.svg" width={20} height={20} alt="seat" />
-            <p className="car-card__icon-text">{city_mpg} MPG</p>
+            <Image src="/fuel.svg" width={25} height={25} alt="seat" />
+            {<p className="car-card__icon-text">{car.mileage} km/L</p> }
           </div>
         </div>
 
