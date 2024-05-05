@@ -3,7 +3,9 @@ import Image from "next/image";
 import { Dialog, Transition } from "@headlessui/react";
 import { useState, Fragment } from "react";
 import { CarProps } from "@types";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 interface BookTestDriveProps {
   isBooking: boolean;
@@ -15,28 +17,59 @@ const BookTestDrive = ({ isBooking, closeModal, car }: BookTestDriveProps) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [dropdownValue, setDropdownValue] = useState("");
-  const [toggleValue, setToggleValue] = useState("");
-  const [carName, setCarName] = useState<string | undefined>(undefined);
+  const [date, setDate] = useState("");
+  const [modelName, setModelName] = useState(car.name);
+  const [timeSlot, setTimeSlot] = useState(0);
+
+  const handleDateChange = (e: any) => {
+    console.log(e.target.value);
+    setDate(e.target.value);
+  };
 
   const handleDropdownChange = (e: any) => {
-    setDropdownValue(e.target.value);
+    setModelName(e.target.value);
   };
 
-  const handleToggleChange = (value: string) => {
-    setToggleValue(value);
+  const handleToggleChange = (value: any) => {
+    setTimeSlot(value);
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
     // Here you can handle form submission
-    console.log("Form submitted:", {
-      firstName,
-      lastName,
-      email,
-      dropdownValue,
-      toggleValue,
-    });
+    try {
+      console.log(event.target.value);
+      const response = await axios.post("http://localhost:5555/bookings", {
+        firstName,
+        lastName,
+        email,
+        modelName: modelName,
+        date: date,
+        timeSlot: timeSlot,
+      });
+      console.log(response.data.message);
+      if (response.data.message == "Booking successful") {
+      }
+      // Reset form fields after successful submission
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setModelName("");
+      setDate("");
+      setTimeSlot(0);
+      toast.success("Booking successfully!", {
+        theme: "colored",
+      });
+    } catch (error: any) {
+      console.error("Error:", error?.response?.data.message);
+      if (error?.response && error?.response?.status === 400) {
+        toast.error("Slot is already booked! Please check another slot.", {
+          theme: "colored",
+        });
+      } else {
+        console.error("Error:", error);
+      }
+    }
   };
 
 
@@ -130,7 +163,7 @@ const BookTestDrive = ({ isBooking, closeModal, car }: BookTestDriveProps) => {
                           </label>
                           <select
                             id="dropdown"
-                            value={dropdownValue}
+                            value={modelName}
                             onChange={handleDropdownChange}
                             className="w-full border rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400"
                           >
@@ -156,35 +189,47 @@ const BookTestDrive = ({ isBooking, closeModal, car }: BookTestDriveProps) => {
                           </select>
                         </div>
                         <div className="mb-4">
+                          <label htmlFor="date" className="block mb-2">
+                            Date:
+                          </label>
+                          <input
+                            type="date"
+                            id="date"
+                            value={date}
+                            onChange={handleDateChange}
+                            className="w-full border rounded-lg py-2 px-3 focus:outline-none focus:border-blue-400"
+                          />
+                        </div>
+                        <div className="mb-4">
                           <label className="block mb-2">Timing:</label>
                           <div>
                             <button
                               className={`border rounded-lg py-2 px-3 mr-2 focus:outline-none ${
-                                toggleValue === "11to12"
+                                timeSlot === 1
                                   ? "bg-blue-500 text-white"
                                   : "bg-white"
                               }`}
-                              onClick={() => handleToggleChange("11to12")}
+                              onClick={() => handleToggleChange(1)}
                             >
                               11.00 - 12.00
                             </button>
                             <button
                               className={`border rounded-lg py-2 px-3 mr-2 focus:outline-none ${
-                                toggleValue === "12to1"
+                                timeSlot === 2
                                   ? "bg-blue-500 text-white"
                                   : "bg-white"
                               }`}
-                              onClick={() => handleToggleChange("12to1")}
+                              onClick={() => handleToggleChange(2)}
                             >
                               12.00 - 13.00
                             </button>
                             <button
                               className={`border rounded-lg py-2 px-3 focus:outline-none ${
-                                toggleValue === "1to2"
+                                timeSlot === 3
                                   ? "bg-blue-500 text-white"
                                   : "bg-white"
                               }`}
-                              onClick={() => handleToggleChange("1to2")}
+                              onClick={() => handleToggleChange(3)}
                             >
                               13.00 - 14.00
                             </button>
