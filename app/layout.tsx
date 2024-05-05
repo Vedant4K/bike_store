@@ -5,7 +5,7 @@ import "./globals.css";
 import { Footer, NavBar } from "@components";
 
 export const metadata = {
-  title: "Bike Hub",
+  title: "MotoBlaze",
   description: "Discover world's best bike showcase application",
 };
 

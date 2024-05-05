@@ -22,7 +22,7 @@ const NavBar = () => {
             height={4}
             className="object-contain"
           />
-          Bike Hub
+          MotoBlaze
         </Link>
 
         {isSignedIn ? (
