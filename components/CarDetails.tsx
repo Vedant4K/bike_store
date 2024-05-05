@@ -1,10 +1,14 @@
-import { Fragment } from "react";
+"use client";
+
+import { Fragment, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import { Dialog, Transition } from "@headlessui/react";
 import { CarProps } from "@types";
 import { generateCarImageUrl } from "@utils";
 import { CustomButton } from "@components";
+import BookTestDrive from "./BookTestDrive";
 
 interface CarDetailsProps {
   isOpen: boolean;
@@ -12,7 +16,11 @@ interface CarDetailsProps {
   car: CarProps;
 }
 
-const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => (
+const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
+
+  const [isBooking, setIsBooking] = useState(false)
+
+  return( 
   <>
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -75,6 +83,7 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => (
                       title="Book a test ride"
                       btnType="button"
                       containerStyles="text-white rounded-full bg-primary-blue min-w-[130px]"
+                      handleClick={() => setIsBooking(true)}
                     />
                   </div>
 
@@ -105,6 +114,6 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => (
       </Dialog>
     </Transition>
   </>
-);
+)};
 
 export default CarDetails;
