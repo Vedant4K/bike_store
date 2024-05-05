@@ -104,6 +104,7 @@ export const allCars = [
   {
     bike_id: 1,
     name: "BMW R 1250 GSA",
+    imgURL: "BMW R 1250 GSA",
     brand: "BMW",
     power: "134 HP",
     torque: "143 Nm",
@@ -115,6 +116,7 @@ export const allCars = [
   {
     bike_id: 2,
     name: "BMW R 1250 GS",
+    imgURL: "BMW R 1250 GS",
     brand: "BMW",
     power: "136 HP",
     torque: "143 Nm",
@@ -126,6 +128,7 @@ export const allCars = [
   {
     bike_id: 3,
     name: "BMW S1000 RR",
+    imgURL: "BMW S1000 RR",
     brand: "BMW",
     power: "207 HP",
     torque: "113 Nm",
@@ -137,6 +140,7 @@ export const allCars = [
   {
     bike_id: 4,
     name: "RE Super Meteor 650",
+    imgURL: "RE Super Meteor 650",
     brand: "Royal Enfield",
     power: "47 HP",
     torque: "52 Nm",
@@ -148,6 +152,7 @@ export const allCars = [
   {
     bike_id: 5,
     name: "RE Himalayan 450",
+    imgURL: "RE Himalayan 450",
     brand: "Royal Enfield",
     power: "24.3 HP",
     torque: "32 Nm",
@@ -159,6 +164,7 @@ export const allCars = [
   {
     bike_id: 6,
     name: "BMW F 850 GSA",
+    imgURL: "BMW F 850 GSA",
     brand: "BMW",
     power: "95 HP",
     torque: "92 Nm",
@@ -170,6 +176,7 @@ export const allCars = [
   {
     bike_id: 7,
     name: "BMW F 850 GS",
+    imgURL: "BMW F 850 GS",
     brand: "BMW",
     power: "95 HP",
     torque: "92 Nm",
@@ -181,6 +188,7 @@ export const allCars = [
   {
     bike_id: 8,
     name: "RE Continental GT 650",
+    imgURL: "RE Continental GT 650",
     brand: "Royal Enfield",
     power: "47 HP",
     torque: "52 Nm",
@@ -192,6 +200,7 @@ export const allCars = [
   {
     bike_id: 9,
     name: "Honda CB 500X",
+    imgURL: "Honda CB 500X",
     brand: "Honda",
     power: "47.5 HP",
     torque: "43 Nm",
@@ -203,6 +212,7 @@ export const allCars = [
   {
     bike_id: 10,
     name: "Honda Highness CB 350",
+    imgURL: "Honda Highness CB 350",
     brand: "Honda",
     power: "20.8 HP",
     torque: "30 Nm",

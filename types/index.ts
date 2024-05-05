@@ -9,6 +9,7 @@ export interface CarProps {
   price: string;
   weight: string;
   fuelTankCapacity: string;
+  imgURL: string;
 }
 
 export interface FilterProps {
