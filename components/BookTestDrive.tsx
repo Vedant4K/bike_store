@@ -45,8 +45,11 @@ const BookTestDrive = ({ isBooking, closeModal, car }: BookTestDriveProps) => {
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     // Here you can handle form submission
+    if(!firstName || !lastName || !email || !date || !modelName || !timeSlot){
+      toast.info("Please enter all details");
+      return;
+    }
     try {
-      console.log(event.target.value);
       const response = await axios.post("http://localhost:5555/bookings", {
         firstName,
         lastName,
